@@ -81,7 +81,7 @@ https.get("https://www.marktplaats.nl/account/login.html", function (res) {
 
                         });
 
-
+			readAd("http://www.marktplaats.nl/a/computers-en-software/laptops-en-notebooks/m693533719-uitstekende-compaq-615-nx560ea.html?c=d721e818194200feca4409741512b6e6&previousPage=mympSeller");
                     }).on('error', function (e) {
                         console.log("Got error: " + e.message);
                     });
@@ -105,3 +105,29 @@ https.get("https://www.marktplaats.nl/account/login.html", function (res) {
 }).on('error', function (e) {
     console.log("Got error: " + e.message);
 });
+
+
+function readAd(url)
+{
+jsdom.env(
+  url,
+  ["http://code.jquery.com/jquery.js"],
+  function (errors, window) {
+    console.log("dinges ", window.$("#vip-breadcrumbs-content").text().trim());
+    console.log("title ", window.$("#title").text().trim());
+
+    console.log("price ", window.$("#vip-ad-price-container").text().replace("Prijs: € ","").trim());
+    console.log("shipping ", window.$("#vip-ad-shipping-cost").text().trim());
+    console.log("options ", window.$("#vip-ad-attributes").text().replace(/:/g,"").trim());
+    console.log("des", window.$("#vip-ad-description").text().trim());
+
+  }
+);
+
+}
+
+function writeAd(url) //todo
+{
+
+
+}
