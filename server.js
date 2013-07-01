@@ -14,23 +14,20 @@ fs.readFile('logins.ini', 'utf8', function (err,data) {
 });
 console.log(username);
 console.log(password);
-http.createServer(function(request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("<h2>Marktplaats Automatische Reposter</h2>");
-  
 
 
-http.get("https://www.marktplaats.nl/account/login.html", function(req, res) {
-  console.log("Got response: " + res.statusCode);
-  console.log(res.getHeader('Cookie'););
-  // console.log(req.cookies.luckynumber);
+
+var https = require("https");
+var test;
+var nieuw = https.get("https://www.marktplaats.nl/account/login.html", function(res, body, callback) {
+callback(res.headers["set-cookie"][0].split(';')[0] + ";" +res.headers["set-cookie"][1].split(';')[0]);
 }).on('error', function(e) {
   console.log("Got error: " + e.message);
 });
+
+console.log(nieuw);
+
   
+     
   
-  
-  
-  
-  response.end();
-}).listen(8888);
+
