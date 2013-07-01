@@ -81,7 +81,6 @@ https.get("https://www.marktplaats.nl/account/login.html", function (res) {
 
                         });
 
-			readAd("http://www.marktplaats.nl/a/computers-en-software/laptops-en-notebooks/m693533719-uitstekende-compaq-615-nx560ea.html?c=d721e818194200feca4409741512b6e6&previousPage=mympSeller");
                     }).on('error', function (e) {
                         console.log("Got error: " + e.message);
                     });
