@@ -82,7 +82,23 @@ res.on('end', function (chunk) {
    function (errors, window) {
 	   window.$('div[class=attribute] ').each(function() {
       console.log("condi",window.$(this).find('label[class=form-label]').text().replace(/^\s*\n/gm, '').trim());
-      console.log("condi",window.$(this).find('.form-field').find('li').text().replace("Kies...",""));
+      var arr = [];
+     window.$(this).find('.form-field').find('li').each(function() {
+		  if(!(window.$(this).text().replace("Kies...","") == "")) {
+		  		   arr.push(window.$(this).text().replace("Kies...",""));
+			   }
+		  });
+      
+      console.log(arr);
+     
+      window.$(this).find('.form-field').find('li').each(function() {
+		    if(!(window.$(this).attr("data-val") == "")) {
+		  console.log("attr",window.$(this).attr("data-val"));
+	  }
+		  
+		  });
+      
+      
      // form-field
     });
       
