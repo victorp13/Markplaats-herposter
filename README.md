@@ -1,4 +1,11 @@
 Markplaats-herposter
 ====================
 
-This project is voor the dutch website Marktplaats.nl to repost an old advertisement to a new one.
+This project is for the dutch website 'marktplaats.nl', it can automatic repost advertisement or clone it from some one else.
+It is written in NodeJS but can easily be converted to PHP or something else.
+
+To run the script, use this command
+
+```
+node server.js
+```

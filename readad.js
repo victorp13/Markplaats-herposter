@@ -12,14 +12,14 @@ jsdom.env({
     console.log("cat2 ", urls.parse(window.$("#vip-breadcrumbs-content h2:eq(1) a").attr("href").trim().replace(/\n$/,""), true).query.categoryId) ;
 
     console.log("title ", window.$("#title").text().trim());
-
+    console.log("images", window.$("#vip-carousel").attr("data-images-xl").split("&"))
     console.log("price ", window.$("#vip-ad-price-container").text().replace("Prijs: € ","").trim());
     console.log("shipping ", window.$("#vip-ad-shipping-cost").text().trim());
     console.log("options ", window.$("#vip-ad-attributes").text().replace(/:/g,"").trim());
-    console.log("des", window.$("#vip-ad-description").text().trim());
+    console.log("des", window.$("#vip-ad-description").innerHTML.trim());
 
   }
 });
 }
 
-readAd("http://www.marktplaats.nl/a/caravans-en-kamperen/camper-inkoop/a1002789301-gezocht-campers-voor-inkoop-en-bemiddeling-rdw-erkend.html?c=c3c3a3fd9c3e4c9081be58a8ffe91384&previousPage=lr&casData=EjuiBbJSjW9XHPx2AUOqLMsHlgTZCQa_ib6ZvxTurkVZ8ZQcRB60PUs-FzHwmjCRSATzCcGp5-lS90RwtcAY2fNZf6ZOj7mGMWvwgLdSAN0laHd9oOfONqpDO3Ne1vuI8g3OsglLRt4");
+readAd("http://www.marktplaats.nl/a/auto-s/chevrolet/m693715695-chevrolet-captiva-suv-7-pers-automaat.html?c=5295d2fa43d5deb6de722080990f22a&previousPage=home");
