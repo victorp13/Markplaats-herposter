@@ -33,9 +33,11 @@ https.get("https://www.marktplaats.nl/account/login.html", function (res) {
                 token = window.$('[name="nl.marktplaats.xsrf.token"]').val();
 
                 var post_data = querystring.stringify({
-                    'j_username': username,
-                    'j_password': password,
+                    'l1': '322',
+                    'l2': '339',
                     'nl.marktplaats.xsrf.token': token
+
+
                 });
 
                 console.log(f_cookies);
@@ -43,7 +45,7 @@ https.get("https://www.marktplaats.nl/account/login.html", function (res) {
 
                 var options = {
                     host: 'www.marktplaats.nl',
-                    path: '/account/securityCheck.html',
+                    path: '/syi/plaatsAdvertentie.html',
                     port: 443,
                     method: 'POST',
                     headers: {
@@ -56,36 +58,16 @@ https.get("https://www.marktplaats.nl/account/login.html", function (res) {
                 };
 
 
-                var post_req = https.get(options, function (res) {
+                 var post_req = https.get(options, function (res) {
                     console.log(res.headers);
                     var all_cookies = f_cookies + ";" + res.headers["set-cookie"][1].split(';')[0];
                     console.log(all_cookies);
-                    var options2 = {
-                        host: 'www.marktplaats.nl',
-                        path: '/mymp/verkopen/sellerAdsBatched.json',
-                        port: 443,
-                        method: 'GET',
-                        headers: {
-                            'Cookie': all_cookies,
+                   
 
-
-                        }
-
-                    };
-
-                    https.get(options2, function (res) {
-                        console.log(res.headers);
-
-                        res.on('data', function (chunk) {
+        res.on('data', function (chunk) {
                             console.log(chunk.toString());
-			
+               
                         });
-                        
-                        readAd("http://www.marktplaats.nl/a/computers-en-software/laptops-en-notebooks/a1003297423-splinternieuw-acer-17-3-dualcore-4-gb-500-gb-17-3.html?c=9b26ed2a557deff636f4f8b9c5b7a618&previousPage=mympSeller");
-
-                    }).on('error', function (e) {
-                        console.log("Got error: " + e.message);
-                    });
 
 
 
@@ -107,29 +89,3 @@ https.get("https://www.marktplaats.nl/account/login.html", function (res) {
     console.log("Got error: " + e.message);
 });
 
-
-function readAd(url)
-{
-jsdom.env({
-  html: url,
-  headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.71 Safari/534.24'},
-  scripts: ["http://code.jquery.com/jquery.js"],
-   done: function (errors, window) {
-    console.log("dinges ", window.$("#vip-breadcrumbs-pagination").text().trim());
-    console.log("title ", window.$("#title").text().trim());
-
-    console.log("price ", window.$("#vip-ad-price-container").text().replace("Prijs: € ","").trim());
-    console.log("shipping ", window.$("#vip-ad-shipping-cost").text().trim());
-    console.log("options ", window.$("#vip-ad-attributes").text().replace(/:/g,"").trim());
-    console.log("des", window.$("#vip-ad-description").text().trim());
-
-  }
-});
-
-}
-
-function writeAd(url) //todo
-{
-
-
-}
