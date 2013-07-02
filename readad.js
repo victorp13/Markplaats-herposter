@@ -16,10 +16,10 @@ jsdom.env({
     console.log("price ", window.$("#vip-ad-price-container").text().replace("Prijs: € ","").trim());
     console.log("shipping ", window.$("#vip-ad-shipping-cost").text().trim());
     console.log("options ", window.$("#vip-ad-attributes").text().replace(/:/g,"").trim());
-    console.log("des", window.$("#vip-ad-description").innerHTML.trim());
+    console.log("des", window.$("#vip-ad-description").html().trim());
 
   }
 });
 }
 
-readAd("http://www.marktplaats.nl/a/auto-s/chevrolet/m693715695-chevrolet-captiva-suv-7-pers-automaat.html?c=5295d2fa43d5deb6de722080990f22a&previousPage=home");
+readAd("http://www.marktplaats.nl/a/huis-en-inrichting/slaapkamer-boxsprings/m693842689-boxspring-waarbij-u-bepaald-hoe-hard-of-zacht-u-wilt-slapen.html?c=5295d2fa43d5deb6de722080990f22a&previousPage=home");
