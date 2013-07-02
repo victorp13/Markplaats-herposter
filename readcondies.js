@@ -80,28 +80,49 @@ res.on('end', function (chunk) {
   samen,
   ["http://code.jquery.com/jquery.js"],
    function (errors, window) {
+	   
+	   var total = [];
+	   
 	   window.$('div[class=attribute] ').each(function() {
-      console.log("condi",window.$(this).find('label[class=form-label]').text().replace(/^\s*\n/gm, '').trim());
+      var soort = window.$(this).find('label[class=form-label]').text().replace(/^\s*\n/gm, '').trim().replace("(verplicht)","").replace(" ", '').trim();
       var arr = [];
+      var arr2 = [];
+      
+      var end = [];
+      var id = window.$(this).find('.form-field').find('input[type=hidden]').attr("name");
+      
+      total[soort] = id
      window.$(this).find('.form-field').find('li').each(function() {
 		  if(!(window.$(this).text().replace("Kies...","") == "")) {
 		  		   arr.push(window.$(this).text().replace("Kies...",""));
 			   }
 		  });
       
-      console.log(arr);
-     
+    
+     var x = 0;
       window.$(this).find('.form-field').find('li').each(function() {
+		  
 		    if(!(window.$(this).attr("data-val") == "")) {
-		  console.log("attr",window.$(this).attr("data-val"));
+		  arr2.push(window.$(this).attr("data-val"));
+		  
+		  total[arr[x]] = window.$(this).attr("data-val")
+		  x++;
 	  }
 		  
 		  });
+		  
+		  
       
       
-     // form-field
+      
+      
+      
+      
+          // form-field
     });
-      
+    console.log(total); 
+      console.log(total["Conditie"]); 
+      console.log(total["Gebruikt"]); 
     
 
 });
