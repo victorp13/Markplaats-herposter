@@ -36,8 +36,8 @@ https.get("https://www.marktplaats.nl/account/login.html", function (res) {
                 token = window.$('[name="nl.marktplaats.xsrf.token"]').val();
 
                 var post_data = querystring.stringify({
-                    'l1': '322',
-                    'l2': '339',
+                    'l1': '395',
+                    'l2': '1925',
                     'nl.marktplaats.xsrf.token': token
 
 
@@ -120,10 +120,24 @@ res.on('end', function (chunk) {
       
           // form-field
     });
-    console.log(total); 
-      console.log(total["Conditie"]); 
-      console.log(total["Gebruikt"]); 
+    if(!(window.$("div[class=multi-select-attribute-title]").text().replace("\n","").trim() == ""))
+    {
+    total[window.$("div[class=multi-select-attribute-title]").text().replace("\n","").trim()] = window.$("div[class=ms-opt] input:eq(0)").attr("name");
     
+    window.$("div[class=ms-opt] ").each(function(){
+		total[window.$(this).find("label").text().trim()] = window.$(this).find("input").attr("value").trim()
+		
+		
+	});
+}
+	
+    console.log(total); 
+      console.log(total["Bereik"]); 
+      console.log(total["2 to 5 km"]); 
+          console.log(total["Eigenschappen"]); 
+      console.log(total["Met broekklem"]); 
+            console.log(total["Type"]); 
+      console.log(total["Portofoon of Walkie-talkie"]); 
 
 });
 
