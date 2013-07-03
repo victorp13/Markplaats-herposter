@@ -39,11 +39,12 @@ jsdom.env({
     console.log("cat2 ", urls.parse(window.$("#vip-breadcrumbs-content h2:eq(1) a").attr("href").trim().replace(/\n$/,""), true).query.categoryId) ;
 
     console.log("title ", window.$("#title").text().trim());
-    console.log("images", window.$("#vip-carousel").attr("data-images-xl").split("&"))
+    console.log("images", window.$("#vip-carousel").attr("data-images-xl").replace("//i.marktplaats.com", "http://i.marktplaats.com").split("&"))
     console.log("price ", window.$("#vip-ad-price-container").text().replace("Prijs:","").trim());
     var ships = window.$("#vip-ad-shipping-cost").text().trim();
     console.log("attribute[8] = ", ship_options[ships.replace(/ *\([^)]*\) */g,'')]);
     console.log("kosten: ",ships.replace(/(^.*\(|\).*$)/g,'').replace('€',''));
+    
     console.log("options ", window.$("#vip-ad-attributes").text().trim().replace(/^\s*\n/gm,"").replace(/:/g,'').replace(/[ ]{2,}/g,'').split('\n'));
     console.log("des", window.$("#vip-ad-description").html().trim());
 
