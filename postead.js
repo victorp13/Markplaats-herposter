@@ -25,8 +25,8 @@ tools.logmein(function(cookies)
 'price.bidding':'free-bidding',
 'attribute[190]':'1602',
 'attribute[8]':'33',
-"contactInformation.sellerName":'Koen',
-'contactInformation.postCode':'3711 AH',
+"contactInformation.sellerName":'Dinges',
+'contactInformation.postCode':'3127 BH',
 'showOnMap' : 'on',
 'origin':'HEADER'
 
