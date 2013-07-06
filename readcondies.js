@@ -8,22 +8,12 @@ var querystring = require('querystring');
 
 var https = require("https");
 var test;
+var tools = require('./login.js');
+
 exports.options = function condition(cat1,cat2, callback)
 {
-https.get("https://www.marktplaats.nl/account/login.html", function(res) {
-    var f_cookies = res.headers["set-cookie"][0].split(';')[0] + ";" + res.headers["set-cookie"][1].split(';')[0];
-    var alles;
-    res.on('data', function(chunk) {
-        alles += chunk.toString();
-
-    });
-
-    res.on('end', function() {
-        var token;
-        jsdom.env(
-        alles, ["http://code.jquery.com/jquery.js"], function(errors, window) {
-            token = window.$('[name="nl.marktplaats.xsrf.token"]').val();
-
+tools.logmein(function(cookies, token)
+{
             var post_data = querystring.stringify({
                 'l1': cat1,
                 'l2': cat2,
@@ -31,6 +21,7 @@ https.get("https://www.marktplaats.nl/account/login.html", function(res) {
 
 
             });
+            console.log(cookies);
 
             var options = {
                 host: 'www.marktplaats.nl',
@@ -38,7 +29,7 @@ https.get("https://www.marktplaats.nl/account/login.html", function(res) {
                 port: 443,
                 method: 'POST',
                 headers: {
-                    'Cookie': f_cookies,
+                    'Cookie': cookies,
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Content-Length': post_data.length
 
@@ -49,7 +40,8 @@ https.get("https://www.marktplaats.nl/account/login.html", function(res) {
 
             var post_req = https.get(options, function(res) {
 
-                var all_cookies = f_cookies + ";" + res.headers["set-cookie"][1].split(';')[0];
+                var all_cookies = res.headers["set-cookie"][1].split(';')[0];
+                console.log(all_cookies);
                 var samen;
 
                 res.on('data', function(chunk) {
@@ -60,10 +52,11 @@ https.get("https://www.marktplaats.nl/account/login.html", function(res) {
 
 
                 res.on('end', function(chunk) {
-
+var token2;
                     jsdom.env(
                     samen, ["http://code.jquery.com/jquery.js"], function(errors, window) {
-
+						token2 = window.$('[name="nl.marktplaats.xsrf.token"]').val();
+						console.log(token2);
                         var total = [];
 
                         window.$('div[class=attribute] ').each(function() {
@@ -112,7 +105,8 @@ https.get("https://www.marktplaats.nl/account/login.html", function(res) {
 
                             });
                         }
-						total["token"] = token;
+						total["token"] = token2;
+						total["cookies"] = cookies;
                         callback(total);
                         
 
@@ -132,13 +126,7 @@ https.get("https://www.marktplaats.nl/account/login.html", function(res) {
             post_req.write(post_data);
             post_req.end();
 
-        });
-
-    });
-
-
-}).on('error', function(e) {
-    console.log("Got error: " + e.message);
 });
 }
+
 

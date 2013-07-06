@@ -41,7 +41,7 @@ var test;
 https.get("https://www.marktplaats.nl/account/login.html", function (res) {
     var f_cookies = res.headers["set-cookie"][0].split(';')[0] + ";" + res.headers["set-cookie"][1].split(';')[0];
     var alles;
-   // console.log(f_cookies);
+  //  console.log(f_cookies);
     res.on('data', function (chunk) {
         alles += chunk.toString();
 
@@ -60,7 +60,7 @@ https.get("https://www.marktplaats.nl/account/login.html", function (res) {
                 });
 
               //  console.log(f_cookies);
-              //  console.log(post_data);
+            //    console.log(post_data);
 
                 var options = {
                     host: 'www.marktplaats.nl',
@@ -78,13 +78,13 @@ https.get("https://www.marktplaats.nl/account/login.html", function (res) {
 
 
                 var post_req = https.get(options, function (res) {
-               //     console.log(res.headers);
+                 //   console.log(res.headers);
                     var all_cookies = f_cookies + ";" + res.headers["set-cookie"][1].split(';')[0];
           //          console.log(all_cookies);
                     
                    // return all_cookies;
-                    callback(all_cookies);
-
+                    callback(all_cookies, token);
+console.log(token);
 
                 }).on('error', function (e) {
                     console.log("Got error: " + e.message);

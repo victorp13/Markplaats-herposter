@@ -3,86 +3,77 @@ var tools = require('./login.js');
 var dingen = require('./readcondies.js');
 var querystring = require('querystring');
 var https = require("https");
-tools.logmein(function(cookies)
-{
-	console.log(cookies)
-	dingen.options("322","339", function(data) {
-		console.log(data["200 tot 500 GB"]);
-		
-		
-	
-	
-	var post_data = querystring.stringify({
-		'complete':'true',
-		'title':'prachtigelaptop',
-		'price.value':'45,00',
-		'price.option':'price',
-		'description':'koop',
-                    'l1': '201',
-                    'l2': '216',
-                    'nl.marktplaats.xsrf.token': data["token"],
+//console.log(cookies)
+dingen.options("820", "340", function(data) {
+    //	console.log(data["200 tot 500 GB"]);
+    console.log(data["cookies"])
 
-'price.bidding':'free-bidding',
-'attribute[190]':'1602',
-'attribute[8]':'33',
-"contactInformation.sellerName":'Dinges',
-'contactInformation.postCode':'3127 BH',
-'showOnMap' : 'on',
-'origin':'HEADER'
+console.log(data);
+    var post_data = querystring.stringify({
+        'complete': 'true',
+        'title': 'Bluetooth GPS Receiver',
+        'price.value': '67,42',
+        'price.option': 'price',
+        'description': 'Met deze bluetooth GPS Satelliet ontvanger breid u uw mobile apparatuur uit. Deze lichtgewicht ontvanger kan maximaal 20 kanalen ontvangen, en heeft een accuratie van minder als 5 meter. De ingebouwde batterij kan tot 9 uur continue werken, en heeft een oplaad tijd van 2 uur. <br /><br /><strong>Eigenschappen:</strong> *Werkt met TomTom, Navicore, en alle grote GPS software pakketten <ul><li>20 parallele satelliet kanalen voor snelle positie bepaling </li><li>Goede navigatie in stads omgevingen </li><li>Ingebouwde oplaadbare Lithium-Polymer batterij voor meer dan 9 uur continu gebruik </li><li>Kan worden geladen met auto lader, terwijl het gebruikt wordt </li><li>Drie kleuren LEDs geven de status aan van de Blutooth/GPS/Power activiteiten van de ontvanger. </li><li>Dimensies: 87(L) x 45(B) x 12(H) mm </li></ul><strong><br />Pakket bevat:</strong> <ul><li>Bluetooth GPS ontvanger </li><li>Auto Lader </li><li>Net Lader </li><li>Handleiding NOTE: Het pakket bevat geen navigatie software, of software drivers. </li></ul>Prijs inclusief BTW, exclusief verzend kosten: € 66.51',
+        'l1': '820',
+        'l2': '340',
+        'nl.marktplaats.xsrf.token': data["token"],
+        'price.bidding': 'free-bidding',
+        'attribute[1203]' : '30',
+        'attribute[8]': '33',
+        "contactInformation.sellerName": 'Dinges',
+        'contactInformation.postCode': '5051 HN',
+        'showOnMap': 'on',
+        'images.ids': '0',
+        'origin': 'HEADER'
 
 
 
-                });
+    });
 
-              //  console.log(f_cookies);
 
-                
-                
-                
-/*
-                var options = {
-                    host: 'www.marktplaats.nl',
-                    path: '/syi/plaatsAdvertentie.html/save.html',
-                    port: 443,
-                    method: 'POST',
-                    headers: {
-						'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.71 Safari/534.24',
-                        'Cookie': cookies+';userid=16090879;',
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Accept-Encoding': 'gzip, deflate',
-                        'Content-Length': post_data.length,
-                        'Connection': 'keep-alive'
-                        
+    console.log(post_data);
 
-                    }
+    var options = {
+        host: 'www.marktplaats.nl',
+        path: '/syi/plaatsAdvertentie.html/save.html',
+        port: 443,
+        method: 'POST',
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.71 Safari/534.24',
+            'Cookie': data["cookies"],
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept-Encoding': 'gzip, deflate',
+            'Content-Length': post_data.length,
+            'Connection': 'keep-alive',
+            'Referer': 'https://www.marktplaats.nl/syi/plaatsAdvertentie.html'
 
-                };
-console.log(options);
+        }
 
-                 var post_req = https.get(options, function (res) {
-                    console.log(res.headers);
-                   // var all_cookies = f_cookies + ";" + res.headers["set-cookie"][1].split(';')[0];
-                  //  console.log(all_cookies);
-                   
+    };
+    console.log(options);
 
-        res.on('data', function (chunk) {
-                            console.log(chunk.toString());
-               
-                        });
+    var post_req = https.get(options, function(res) {
+        console.log(res.headers);
+        // var all_cookies = f_cookies + ";" + res.headers["set-cookie"][1].split(';')[0];
+        //  console.log(all_cookies);
+
+        res.on('data', function(chunk) {
+            //console.log(chunk.toString());
+        });
 
 
 
-                }).on('error', function (e) {
-                    console.log("Got error: " + e.message);
-                });
+    }).on('error', function(e) {
+        console.log("Got error: " + e.message);
+    });
 
 
-                // write parameters to post body  
-                post_req.write(post_data);
-                post_req.end();//*/
-	});
-	
+    // write parameters to post body  
+    post_req.write(post_data);
+    post_req.end();
 });
+
 
 /* *
      var options2 = {
